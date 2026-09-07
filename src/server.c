@@ -1,4 +1,5 @@
 #include "../include/server.h"
+#include "../include/parser.h"
 #include "parser.c"
 
 #include <stdio.h>
@@ -6,7 +7,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#include "../include/parser.h"
+
 
 
 // Default winsock2 server

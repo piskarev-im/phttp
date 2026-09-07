@@ -5,7 +5,10 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(http src/main.c
         include/phttp.h
-        src/phttp.c)
+        src/phttp.c
+        src/proto.c
+        include/proto.h
+)
 
 link_directories(http PUBLIC include/)
 

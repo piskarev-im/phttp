@@ -4,14 +4,21 @@
 	#define HTTP_PROTOTYPE_HTTP_H
 #endif
 
+// (\n\n || \n) || (\r\n\r\n || \r\n)
+#ifdef __WIN32__ || __WIN64__ || (_WIN32 || _WIN64)
+	#define CLRF '\r\n\r\n'
+#else
+	#define CLRF '\n\n'
+#endif
+
 #ifndef P_HTTP_STATUS
 	#define P_HTTP_STATUS
 	// After defining code we can use increment or decrement to use any code
 	#define P_HTTP_CODE_INFO 100
 	#define P_HTTP_CODE_SUCCESS 200
 	#define P_HTTP_CODE_REDIRECT 300
-	#define P_HTTP_CODE_NOT_FOUND 400
-	#define P_HTTP_CODE_ERROR 500
+	#define P_HTTP_CODE_CLIENT_ERROR 400
+	#define P_HTTP_CODE_SERVER_ERROR 500
 #endif
 
 #ifndef P_HTTP_METHOD
@@ -23,32 +30,6 @@
 	#define P_HTTP_METHOD_OPTIONS 6 >> 2
 	#define P_HTTP_METHOD_TRACE 7 >> 2
 	#define P_HTTP_METHOD_CONNECT 8 >> 2
-#endif
-
-// Http Headers from http/1.0 - http/1.1
-#ifndef P_HTTP_HEADER
-// Content-Type
-	#define P_HTTP_HEADER_CT "%s/%s" // text/html
-// Content-Length
-	#define P_HTTP_HEADER_CL "%s" // Content len as int,
-// Accept
-	#define P_HTTP_HEADER_ACCEPT "%s/%s" // text/html
-// Accept-Charset
-	#define P_HTTP_HEADER_CS "%s" // utf-8
-// Accept-Encoding
-	#define P_HTTP_HEADER_AE "%s" // compress
-// Accept-Language
-	#define P_HTTP_HEADER_AL "%s" // ru
-// Authorization
-	#define P_HTTP_HEADER_AUTH "%s" // Bearer ...asdasd
-// Content-Disposition
-	#define P_HTTP_HEADER_CD "%s" // Content-Disposition: form-data; ...
-// Expect
-	#define P_HTTP_HEADER_EXPECT "%s" // 100-continue
-// Host
-	#define P_HTTP_HEADER_HOST "%s" // Uri
-//User-Agent
-	#define P_HTTP_HEADER_UA "%s"
 #endif
 
 typedef enum  {
@@ -68,13 +49,13 @@ typedef enum  { // i gonna use only 6 for start, later we can create 4xx class s
 	HTTP_CODE_NOT_FOUND,
 } HTTP_STATUS_CODE;
 
-enum HTTP_SERVICE_HEADERS {
+typedef enum {
 	CACHE_CONTROL,
 	CONNECTION,
-	DATE,
+	HDATE, // Common DATE not allowed
 	MIME_VERSION,
 	PRAGMA,
-};
+} HTTP_SERVICE_HEADERS;
 
 // not all :(
 typedef enum {
@@ -115,7 +96,75 @@ typedef struct {
 
 typedef struct {
 	HTTP_CORE_MODEL model; // 1-st line of http
-	HTTP_CLIENT_HEADERS headers;
+	HTTP_CORE_HEADER headers;
 	// buffer
 	char *body;
 } HTTP_CLIENT_REQUEST;
+
+// Headers
+// Content-Type
+typedef struct {
+	char content_type1;
+	char content_type2;
+	char charset;
+	char boundary;
+} P_HTTP_HEADER_CT;
+
+typedef struct {
+	unsigned int length;
+} P_HTTP_HEADER_CL;
+// Structure for Accept / Accept-Encoding
+typedef struct {
+	char accept;
+	float q; // Q param, .0 - 1.0, priority of element
+} P_HTTP_HEADER_SUB;
+
+// Accept
+typedef struct {
+	char allowed_types;
+} P_HTTP_HEADER_ACCEPT;
+
+// Accept-Charset
+typedef struct {
+	char charset;
+} P_HTTP_HEADER_CS;
+
+typedef struct {
+	P_HTTP_HEADER_SUB params;
+} P_HTTP_HEADER_AE;
+
+typedef struct {
+	char lang;
+} P_HTTP_HEADER_AL;
+
+typedef struct {
+	char auth_type; // Bearer or any else
+	char token; // Token / Hash
+} P_HTTP_HEADER_AUTH;
+
+typedef struct {
+	char key;
+	char value;
+} P_HTTP_HEADER_UNIFIED_FIELD;
+
+typedef struct {
+	char type;
+	P_HTTP_HEADER_UNIFIED_FIELD fields;
+} P_HTTP_HEADER_CD;
+
+// So, here we could have only 1 value
+// 100-continue
+typedef struct {
+	char expect;
+} P_HTTP_HEADER_EXPECT;
+
+typedef struct {
+	char uri;
+} P_HTTP_HEADER_HOST;
+
+// User-Agent: <product> / <product-version> <comment>
+typedef struct {
+	char product;
+	char version;
+	char comment; // Here should be a billion of arguments :(
+} P_HTTP_HEADER_UA;

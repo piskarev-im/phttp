@@ -171,6 +171,8 @@ static void parse_request_dictionary(PyObject *result, HTTP_CLIENT_REQUEST *requ
 
 		HTTP_CORE_HEADER *headers = malloc(sizeof(HTTP_CORE_HEADER) * total);
 		parse_request_headers(p_tuple, tuple_size, total, &headers, &count);
+
+		// TODO: Finish return result via pointer
 	}
 }
 

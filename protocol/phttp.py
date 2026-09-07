@@ -29,7 +29,7 @@ http_client_req = {
 http_req_pattern = re.compile(r'^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,63}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$')
 http_protov_pattern = re.compile(r'HTTP+\/+\d{1}.(\d{1}||[x])$')
 
-def is_http_method(method):
+def is_http_method(method) -> bool:
 	return method.upper() == 'GET' or method.upper() == 'POST' or  method.upper() == 'PUT' or method.upper() == 'DELETE' or method.upper() == 'HEAD'
 
 def is_http_path(path):
