@@ -22,14 +22,14 @@
 #endif
 
 #ifndef P_HTTP_METHOD
-	#define P_HTTP_METHOD_GET 1 >> 2
-	#define P_HTTP_METHOD_POST 2 >> 2
-	#define P_HTTP_METHOD_PUT 3 >> 2
-	#define P_HTTP_METHOD_DELETE 4 >> 2
-	#define P_HTTP_METHOD_HEAD 5 >> 2
-	#define P_HTTP_METHOD_OPTIONS 6 >> 2
-	#define P_HTTP_METHOD_TRACE 7 >> 2
-	#define P_HTTP_METHOD_CONNECT 8 >> 2
+	#define P_HTTP_METHOD_GET 1 << 2
+	#define P_HTTP_METHOD_POST 2 << 2
+	#define P_HTTP_METHOD_PUT 3 << 2
+	#define P_HTTP_METHOD_DELETE 4 << 2
+	#define P_HTTP_METHOD_HEAD 5 << 2
+	#define P_HTTP_METHOD_OPTIONS 6 << 2
+	#define P_HTTP_METHOD_TRACE 7 << 2
+	#define P_HTTP_METHOD_CONNECT 8 << 2
 #endif
 
 typedef enum  {

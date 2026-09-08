@@ -30,5 +30,3 @@ def content_disposition_allowed(p: str) -> List:
 		else:
 			result.append(params[i])
 	return result
-
-def
