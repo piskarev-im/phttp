@@ -77,7 +77,8 @@ int initialize_python() {
 };
 
 __attribute__((noreturn))
-static void parse_request_headers(PyObject *p_tuple, size_t tuple_size, size_t total, HTTP_CORE_HEADER **headers, size_t *outc) { // -> Dict[key, tuple[Dict[str,str]] >> HTTP_HEADER[]
+static void parse_request_headers(PyObject *p_tuple, size_t tuple_size, size_t total, HTTP_CORE_HEADER **headers, size_t *outc) {
+    // -> Dict[key, tuple[Dict[str,str]] >> HTTP_HEADER[]
 	HTTP_CORE_HEADER *t_headers = malloc(sizeof(HTTP_CORE_HEADER) * total);
 	if (!t_headers) {
 		printf("Mem for headers not allocated\n");

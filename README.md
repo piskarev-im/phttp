@@ -84,5 +84,6 @@ def parse_http_header(raw_headers: tuple[str]) -> tuple[dict[str, str]]
 1. https://ru.wikipedia.org/wiki/TCP/IP
 2. https://metanit.com/c/tutorial
 3. https://ru.wikipedia.org/wiki/HTTP
+4. https://datatracker.ietf.org/doc/html/rfc2616#autoid-42
 
 [![Most useful visualisation](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7wuEVkmEl-Aqnb7m5_9n0JPTC2y1XIe3B9tokm9GQPOvu6jO8)](#)
