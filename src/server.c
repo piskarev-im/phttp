@@ -7,9 +7,6 @@
 #include <pthread.h>
 #include <unistd.h>
 
-
-
-
 // Default winsock2 server
 // Used for me to remember what we do here: winsock2 ...func returns 0 if no error else error code
 // AF_INET is used for IPv4, AF_INET6 (|| 2) is used for IPv6 SOCK_STREAM == tcp // SOCK_DRAM == udp, protocol idk, mb we need it )

@@ -134,16 +134,16 @@ static void parse_request_dictionary(PyObject *result, HTTP_CLIENT_REQUEST *requ
 
 #pragma GCC diagnostic ignored "-Wno-write-strings"
 	if (temp) {
-		char *path = PyUnicode_AsUTF8(p_Path); // URL
+		const char *path = PyUnicode_AsUTF8(p_Path); // URL
 		if (path) temp->model.addr = path;
 
-		char *method = PyUnicode_AsUTF8(p_Method); // METHOD
+		const char *method = PyUnicode_AsUTF8(p_Method); // METHOD
 		if (method) temp->model.method = method;
 
-		char *protocol = PyUnicode_AsUTF8(p_Protocol); // PROTO_V
+		const char *protocol = PyUnicode_AsUTF8(p_Protocol); // PROTO_V
 		if (protocol) temp->model.proto = protocol;
 
-		char *body = PyUnicode_AsUTF8(p_Payload); // BODY
+		const char *body = PyUnicode_AsUTF8(p_Payload); // BODY
 		if (body) temp->body = body;
 
 		if (!result || PyDict_Check(result)) {

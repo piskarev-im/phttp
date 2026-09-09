@@ -5,7 +5,7 @@
 #endif
 
 // (\n\n || \n) || (\r\n\r\n || \r\n)
-#ifdef __WIN32__ || __WIN64__ || (_WIN32 || _WIN64)
+#ifdef defined(__WIN32__) || defined(__WIN64__) || defined(_WIN32 || _WIN64)
 	#define CLRF '\r\n\r\n'
 #else
 	#define CLRF '\n\n'
@@ -30,6 +30,21 @@
 	#define P_HTTP_METHOD_OPTIONS 6 << 2
 	#define P_HTTP_METHOD_TRACE 7 << 2
 	#define P_HTTP_METHOD_CONNECT 8 << 2
+#endif
+
+// < 256
+#ifndef P_HTTP_CLIENT_HEADER
+	#define P_HTTP_CLIENT_H_ACC 1
+	#define P_HTTP_CLIENT_H_AUTH 2
+	#define P_HTTP_CLIENT_H_HOST 3
+	#define P_HTTP_CLIENT_H_CT 4
+	#define P_HTTP_CLIENT_H_UA 5
+	#define P_HTTP_CLIENT_H_CL 6
+	#define P_HTTP_CLIENT_H_ACCC 7
+	#define P_HTTP_CLIENT_H_ACCE 8
+	#define P_HTTP_CLIENT_H_ACCL 9
+	#define P_HTTP_CLIENT_H_CD 10
+	#define P_HTTP_CLIENT_H_EXPECT 11
 #endif
 
 typedef enum  {

@@ -15,7 +15,7 @@
 
 // TODO: Try to make function smarter
 // Mb should be used macro-programming
-int compare_method(char method) {
+unsigned int compare_method(char method) {
 	if (strncmp(&method, "GET", 3) == 0) return P_HTTP_METHOD_GET;
 	if (strncmp(&method, "POST", 4) == 0) return P_HTTP_METHOD_POST;
 	if (strncmp(&method, "PUT", 3) == 0) return P_HTTP_METHOD_PUT;
@@ -28,7 +28,7 @@ int compare_method(char method) {
 }
 
 // If returns 0 -> failed to get class => error
-int get_status_class(int status_c) {
+unsigned int get_status_class(unsigned int status_c) {
 	int class = status_c / 100;
 	if (class == 1) return P_HTTP_CODE_INFO;
 	if (class == 2) return P_HTTP_CODE_SUCCESS;
@@ -38,57 +38,25 @@ int get_status_class(int status_c) {
 	return 0;
 }
 
-int resolve_header(HTTP_CORE_HEADER header) {
-	if (header.name == (char)"Content-Type") {
+unsigned int resolve_header(HTTP_CORE_HEADER header) {
+	if (strcmp(&header.name, "Content-Type") == 0) return P_HTTP_CLIENT_H_CT;
+	if (strcmp(&header.name, "Content-Length") == 0) return P_HTTP_CLIENT_H_CL;
+	if (strcmp(&header.name, "Accept") == 0) return P_HTTP_CLIENT_H_ACC;
+	if (strcmp(&header.name, "Accept-Charset") == 0) return P_HTTP_CLIENT_H_ACCC;
+	if (strcmp(&header.name, "Accept-Encoding") == 0) return P_HTTP_CLIENT_H_ACCE;
+	if (strcmp(&header.name, "Accept-Language") == 0) return P_HTTP_CLIENT_H_ACCL;
+	if (strcmp(&header.name, "Authorization") == 0) return P_HTTP_CLIENT_H_AUTH;
+	if (strcmp(&header.name, "Content-Disposition") == 0) return P_HTTP_CLIENT_H_CD;
+	if (strcmp(&header.name, "Expect") == 0) return P_HTTP_CLIENT_H_EXPECT;
+	if (strcmp(&header.name, "Host") == 0) return P_HTTP_CLIENT_H_HOST;
+	if (strcmp(&header.name, "User-Agent") == 0) return P_HTTP_CLIENT_H_UA;
 
-	}
-	if (header.name == (char)"Content-Length") {
-
-	}
-	if (header.name == (char)"Accept") {
-
-	}
-	if (header.name == (char)"Accept-Charset") {
-
-	}
-	if (header.name == (char)"Accept-Encoding") {
-
-	}
-	if (header.name == (char)"Accept-Language") {
-
-	}
-	if (header.name == (char)"Authorization") {
-
-	}
-	if (header.name == (char)"Content-Disposition") {
-
-	}
-	if (header.name == (char)"Expect") {
-
-	}
-	if (header.name == (char)"Host") {
-
-	}
-	if (header.name == (char)"User-Agent") {
-
-	}
+	return 0;
 }
 
 // If resolved == 1; else return 0
 // If notResolved it means client receives 4xx error, due bad request
 // To resolve headers list should contain all required
-int resolve_required_client_header(HTTP_CORE_HEADER header) {
-
-}
-
-// Get parameters of header from python, but resolve here
-int client_content_type(HTTP_CORE_HEADER header) {
-	if (header.name != (char)"Content-Type" || !header.name) return 0;
-	// header -> python -> tuple[reuslt]
-	// Change result, it is bullshit
-	char result[2] = { };
-	char params[8] = { };
-	char ct_1 = result[0]; // COntentType 1st
-	char ct_2 = result[1]; // ContentType 2 nd
-
+unsigned int resolve_required_client_header(HTTP_CORE_HEADER header) {
+	return 0;
 }

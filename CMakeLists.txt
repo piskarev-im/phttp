@@ -18,3 +18,4 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 # Linking python libs
 target_include_directories(http PRIVATE ${Python3_INCLUDE_DIRS})
 target_link_libraries(http PRIVATE Python3::Python)
+target_link_libraries(http PRIVATE ws2_32)
